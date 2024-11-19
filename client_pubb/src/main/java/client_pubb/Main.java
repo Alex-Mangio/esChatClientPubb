@@ -9,13 +9,13 @@ import java.net.UnknownHostException;
 
 public class Main {
     public static void main(String[] args) throws UnknownHostException, IOException {
-        System.out.println("Hello world!");
         
         Socket s = new Socket("localhost",3000);
-        
+        ThreadClient tc = new ThreadClient(s);
+        tc.start();
         BufferedReader in = new BufferedReader(new InputStreamReader(s.getInputStream()));
         DataOutputStream out = new DataOutputStream(s.getOutputStream());
 
-        in.
+        
     }
 }
