@@ -28,6 +28,7 @@ public class ThreadClient extends Thread {
             System.out.println("Ti sei connesso con il server");
 
             boolean connessione = true;
+            boolean connection = true;
 
             // gestione username
             do {
@@ -40,6 +41,8 @@ public class ThreadClient extends Thread {
                 String menu = in.readLine();
 
                 if (menu.equals("MENU")) {
+
+                    connection = false;
 
                     System.out.println("MENU PRINCIPALE \n");
                     System.out.println("1)Digita '1' per andare in chat PRIVATA \n");
@@ -57,7 +60,7 @@ public class ThreadClient extends Thread {
 
                                 // MENU per le chat PRIVATE
                                 System.out.println("Scegli cosa vuoi fare in chat privata: \n");
-                                System.out.println("1)Digita '1' per vedere la lista delle tue chat PRIVATE \n");
+                                System.out.println("1)Digita '1' per vedere la lista dei tuoi contatti \n");
                                 System.out.println("2)Digita '2' per iniziare a chattare con un tuo contatto \n");
                                 System.out.println("3)Digita '3' per tornare al MENU PRINCIPALE \n");
 
@@ -79,7 +82,7 @@ public class ThreadClient extends Thread {
                                                 System.out.println(contatti.get(i));
                                             }
                                         } else {
-                                            System.out.println("Non hai nessun contatto privato registrato \n");
+                                            System.out.println("Non hai nessun contatto registrato \n");
                                         }
                                         break;
 
@@ -101,7 +104,7 @@ public class ThreadClient extends Thread {
                                 do {
                                     // MENU per le chat PUBBLICHE
                                     System.out.println("Scegli cosa vuoi fare in chat pubblica: \n");
-                                    System.out.println("1)Digita '1' per vedere la lista dei tuoi gruppi PUBBLICI \n");
+                                    System.out.println("1)Digita '1' per vedere la lista dei tuoi contatti \n");
                                     System.out.println("2)Digita '2' per iniziare a chattare con un gruppo \n");
                                     System.out.println("3)Digita '3' per tornare al MENU PRINCIPALE \n");
 
@@ -118,7 +121,7 @@ public class ThreadClient extends Thread {
                                             while (true) {
                                                 String lista = in.readLine();
                                                 if (lista.equals("VUOTO")) {
-                                                    System.out.println("Non hai gruppi registrati \n");
+                                                    System.out.println("Non hai contatti registrati \n");
                                                     break;
                                                 } else {
                                                     gruppi.add(lista);
@@ -133,6 +136,20 @@ public class ThreadClient extends Thread {
                                             break;
 
                                         case "2":
+                                            //mando un messaggio in brodcast a tutti gli altri client connessi
+                                            out.writeBytes("SCRIVI_PUBBLIC");
+                                            String conferma = in.readLine();
+                                            System.out.println(conferma);
+
+                                            Scanner messaggioInput = new Scanner(System.in);
+                                            String messaggio = messaggioInput.nextLine();
+
+                                            String[] arrayMess = messaggio.split(messaggio);
+
+                                            for(String i: arrayMess){
+                                                //da gestire
+                                            }
+
                                             break;
 
                                         case "3":
@@ -146,6 +163,7 @@ public class ThreadClient extends Thread {
                                 // DISCONNESSIONE client
                                 out.writeBytes("DISCONNETTI" + "\n");
                                 String risposta3 = in.readLine();
+                                //username + s.close()
                                 break;
 
                         }
@@ -153,7 +171,7 @@ public class ThreadClient extends Thread {
                 } else {
                     System.out.println(menu);
                 }
-            } while (true);
+            } while (connection);
         } catch (Exception e) {
             e.printStackTrace();
         }
