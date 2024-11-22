@@ -10,7 +10,7 @@ import java.net.UnknownHostException;
 public class Main {
     public static void main(String[] args) throws UnknownHostException, IOException {
         
-        Socket s = new Socket("192.168.1.55",3000);
+        Socket s = new Socket("172.21.227.126",3000);
         ThreadClient tc = new ThreadClient(s);
         tc.start();
         BufferedReader in = new BufferedReader(new InputStreamReader(s.getInputStream()));

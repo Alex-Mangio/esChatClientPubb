@@ -30,8 +30,8 @@ public class ThreadClient extends Thread {
             boolean connessione = true;
             boolean connection = true;
 
-            // gestione username
             do {
+                // gestione username
                 String benvenuto = in.readLine();
                 System.out.println(benvenuto);
                 Scanner inputUsername = new Scanner(System.in);
@@ -144,14 +144,19 @@ public class ThreadClient extends Thread {
                                             Scanner messaggioInput = new Scanner(System.in);
                                             String messaggio = messaggioInput.nextLine();
 
-                                            String[] arrayMess = messaggio.split(messaggio);
+                                            String[] arrayMess = messaggio.split(" ");
 
                                             for(String i: arrayMess){
-                                                //
+                                                out.writeBytes(i + "\n");
+                                                String ackMess = in.readLine();
                                             }
+                                            out.writeBytes("@" + "\n");
+                                            
+                                            String stampaMess = in.readLine();
 
+                                            System.out.println(stampaMess);
                                             break;
-
+                                            
                                         case "3":
 
                                             break;
