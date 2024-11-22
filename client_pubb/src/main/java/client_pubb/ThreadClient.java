@@ -147,7 +147,7 @@ public class ThreadClient extends Thread {
                                             String[] arrayMess = messaggio.split(messaggio);
 
                                             for(String i: arrayMess){
-                                                //da gestire
+                                                //
                                             }
 
                                             break;
